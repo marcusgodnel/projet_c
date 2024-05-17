@@ -1,0 +1,70 @@
+#include <stdio.h>
+
+typedef struct {
+    char titulaire[50];
+    int numeroCompte;
+    double solde;
+} CompteBancaire;
+
+void consulterSolde(CompteBancaire compte) {
+    printf("Le solde du compte de %s est: %.2f\n", compte.titulaire, compte.solde);
+}
+
+void deposerArgent(CompteBancaire *compte, double montant) {
+    if (montant > 0) {
+        compte->solde += montant;
+        printf("%.2f a ete depose sur le compte.\n", montant);
+    } else {
+        printf("Montant de depot invalide.\n");
+    }
+}
+
+void retirerArgent(CompteBancaire *compte, double montant) {
+    if (montant > 0 && montant <= compte->solde) {
+        compte->solde -= montant;
+        printf("%.2f a ete retire du compte.\n", montant);
+    } else {
+        printf("Montant de retrait invalide ou solde insuffisant.\n");
+    }
+}
+
+int main() {
+    CompteBancaire compte = {"Jean Dupont", 123456, 1000.0};
+    
+    int choix;
+    double montant;
+
+    do {
+        printf("\nMenu:\n");
+        printf("1. Consulter le solde\n");
+        printf("2. Deposer de l'argent\n");
+        printf("3. Retirer de l'argent\n");
+        printf("4. Quitter\n");
+        printf("Choisissez une option: ");
+        scanf("%d", &choix);
+
+        switch (choix) {
+            case 1:
+                consulterSolde(compte);
+                break;
+            case 2:
+                printf("Entrez le montant a deposer: ");
+                scanf("%lf", &montant);
+                deposerArgent(&compte, montant);
+                break;
+            case 3:
+                printf("Entrez le montant a retirer: ");
+                scanf("%lf", &montant);
+                retirerArgent(&compte, montant);
+                break;
+            case 4:
+                printf("Merci d'avoir utilise notre service bancaire.\n");
+                break;
+            default:
+                printf("Choix invalide. Veuillez reessayer.\n");
+                break;
+        }
+    } while (choix != 4);
+
+    return 0;
+}
