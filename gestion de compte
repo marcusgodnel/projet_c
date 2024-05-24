@@ -29,7 +29,7 @@ void retirerArgent(CompteBancaire *compte, double montant) {
 }
 
 int main() {
-    CompteBancaire compte = {"Jean Dupont", 123456, 1000.0};
+    CompteBancaire compte = {"Mr MARC OWUSU", 123456, 20000.0};
     
     int choix;
     double montant;
